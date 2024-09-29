@@ -102,5 +102,3 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
-
-SELECT * FROM patient;
