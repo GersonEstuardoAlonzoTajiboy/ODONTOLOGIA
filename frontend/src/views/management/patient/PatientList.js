@@ -61,15 +61,6 @@ const PatientList = () => {
       });
   };
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
   const createPatient = () => {
     navigate('/ui/create-patient');
   };
@@ -133,11 +124,6 @@ const PatientList = () => {
               <TableCell sx={{ fontSize: '15px' }}>Nombre Completo</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Dirección</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Sexo</TableCell>
-              {/* 
-              <TableCell sx={{ fontSize: '15px' }}>Fecha de nacimiento</TableCell>
-              <TableCell sx={{ fontSize: '15px' }}>Contacto de emergencia</TableCell>
-              <TableCell sx={{ fontSize: '15px' }}>Telefono de emergencia</TableCell>
-              */}
               <TableCell sx={{ fontSize: '15px' }}>Cuestionario</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Evaluación</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Tratamientos</TableCell>
@@ -154,11 +140,6 @@ const PatientList = () => {
                 <TableCell sx={{ fontSize: '15px' }}>{patient.full_name}</TableCell>
                 <TableCell sx={{ fontSize: '15px' }}>{patient.address}</TableCell>
                 <TableCell sx={{ fontSize: '15px' }}>{patient.sex}</TableCell>
-                {/*
-                <TableCell sx={{ fontSize: '15px' }}>{patient.birth_date}</TableCell>
-                <TableCell sx={{ fontSize: '15px' }}>{patient.emergency_contact}</TableCell>
-                <TableCell sx={{ fontSize: '15px' }}>{patient.emergency_phone}</TableCell>
-                */}
                 <TableCell>
                   <Button
                     variant="contained"
@@ -240,18 +221,6 @@ const PatientList = () => {
               </TableRow>
             ))}
           </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[10, 25, 50]}
-                count={totalPatients}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
-            </TableRow>
-          </TableFooter>
         </Table>
       ) : (
         <Typography variant="subtitle1" align="center">
