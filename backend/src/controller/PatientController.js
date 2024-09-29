@@ -5,14 +5,14 @@ const sequelize = Patient.sequelize;
 export const registerPatient = async (req, res, next) => {
   const transaction = await sequelize.transaction();
   try {
-    const { full_name, address, sex, birth_date, emergency_contact, emergency_phone } = req.body;
+    const { full_name, address, email, phone, sex, birth_date, name_contact, relationship, emergency_phone } = req.body;
     const existingPatient = await Patient.findOne({ where: { full_name }, transaction });
     if (existingPatient) {
       await transaction.rollback();
       return res.status(400).json({ message: 'The patient is already registered in the system.' });
     } else {
-      await sequelize.query('CALL procedure_to_register_patient(:full_name, :address, :sex, :birth_date, :emergency_contact, :emergency_phone)', {
-        replacements: { full_name, address, sex, birth_date, emergency_contact, emergency_phone },
+      await sequelize.query('CALL procedure_to_register_patient(:full_name, :address, :email, :phone, :sex, :birth_date, :name_contact, :relationship, :emergency_phone)', {
+        replacements: { full_name, address, email, phone, sex, birth_date, name_contact, relationship, emergency_phone },
         transaction
       });
     }

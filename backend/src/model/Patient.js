@@ -21,6 +21,14 @@ const Patient = sequelize.define('patient', {
     type: DataTypes.STRING(255),
     allowNull: false
   },
+  email: {
+    type: DataTypes.STRING(50),
+    allowNull: false
+  },
+  phone: {
+    type: DataTypes.STRING(8),
+    allowNull: false
+  },
   sex: {
     type: DataTypes.CHAR(1),
     allowNull: false
@@ -29,9 +37,13 @@ const Patient = sequelize.define('patient', {
     type: DataTypes.DATEONLY,
     allowNull: false
   },
-  emergency_contact: {
+  name_contact: {
     type: DataTypes.STRING(255),
     allowNull: true
+  },
+  relationship: {
+    type: DataTypes.STRING(50),
+    allowNull: false
   },
   emergency_phone: {
     type: DataTypes.STRING(8),

@@ -12,9 +12,12 @@ const ModificationCreationPatient = () => {
   const [patientId] = useState(isEditing ? patientData.id : '');
   const [fullName, setFullName] = useState(isEditing ? patientData.full_name : '');
   const [address, setAddress] = useState(isEditing ? patientData.address : '');
+  const [email, setEmail] = useState(isEditing ? patientData.email : '');
+  const [phone, setPhone] = useState(isEditing ? patientData.phone : '');
   const [sex, setSex] = useState(isEditing ? patientData.sex : '');
   const [birthDate, setBirthDate] = useState(isEditing ? patientData.birth_date : '');
-  const [emergencyContact, setEmergencyContact] = useState(isEditing ? patientData.emergency_contact : '');
+  const [nameContact, setNameContact] = useState(isEditing ? patientData.emergency_contact : '');
+  const [relationship, setRelationship] = useState(isEditing ? patientData.relationship : '');
   const [emergencyPhone, setEmergencyPhone] = useState(isEditing ? patientData.emergency_phone : '');
 
   const handleSubmit = async () => {
@@ -22,9 +25,12 @@ const ModificationCreationPatient = () => {
       id: patientId,
       full_name: fullName,
       address,
+      email,
+      phone,
       sex,
       birth_date: birthDate,
-      emergency_contact: emergencyContact,
+      name_contact: nameContact,
+      relationship: relationship,
       emergency_phone: emergencyPhone
     };
     if (isEditing) {
@@ -112,13 +118,48 @@ const ModificationCreationPatient = () => {
                 htmlFor="address"
                 mb="5px"
               >
-                Dirección
+                Dirección de vivienda
               </Typography>
               <CustomTextField
                 id="address"
                 variant="outlined"
                 fullWidth value={address}
                 onChange={(e) => setAddress(e.target.value)}
+              />
+            </Box>
+            <Box>
+              <Typography
+                variant="subtitle1"
+                fontWeight={600}
+                component="label"
+                htmlFor="email"
+                mb="5px"
+              >
+                Correo electrónico
+              </Typography>
+              <CustomTextField
+                id="email"
+                type="email"
+                variant="outlined"
+                fullWidth value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Box>
+            <Box>
+              <Typography
+                variant="subtitle1"
+                fontWeight={600}
+                component="label"
+                htmlFor="phone"
+                mb="5px"
+              >
+                Telefono
+              </Typography>
+              <CustomTextField
+                id="phone"
+                variant="outlined"
+                fullWidth value={phone}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </Box>
             <Box>
@@ -160,17 +201,34 @@ const ModificationCreationPatient = () => {
                 variant="subtitle1"
                 fontWeight={600}
                 component="label"
-                htmlFor="emergencyContact"
+                htmlFor="nameContact"
                 mb="5px"
               >
-                Contacto de Emergencia
+                Nombre de contacto
               </Typography>
               <CustomTextField
-                id="emergencyContact"
+                id="nameContact"
                 variant="outlined"
                 fullWidth
-                value={emergencyContact}
-                onChange={(e) => setEmergencyContact(e.target.value)}
+                value={nameContact}
+                onChange={(e) => setNameContact(e.target.value)}
+              />
+            </Box>
+            <Box>
+              <Typography
+                variant="subtitle1"
+                fontWeight={600}
+                component="label"
+                htmlFor="relationship"
+                mb="5px"
+              >
+                Parentesco de contacto
+              </Typography>
+              <CustomTextField
+                id="relationship"
+                variant="outlined"
+                fullWidth value={relationship}
+                onChange={(e) => setRelationship(e.target.value)}
               />
             </Box>
             <Box>
@@ -181,7 +239,7 @@ const ModificationCreationPatient = () => {
                 htmlFor="emergencyPhone"
                 mb="5px"
               >
-                Teléfono de Emergencia
+                Teléfono de contacto
               </Typography>
               <CustomTextField
                 id="emergencyPhone"
