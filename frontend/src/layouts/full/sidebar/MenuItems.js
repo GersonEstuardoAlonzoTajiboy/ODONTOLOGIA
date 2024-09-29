@@ -48,18 +48,26 @@ const Menuitems = [
     navlabel: true,
     subheader: 'Agenda y Citas'
   },
-  {
-    id: uniqueId(),
-    title: 'Citas',
-    icon: IconCalendar,
-    href: '/appointments'
-  },
-  {
-    id: uniqueId(),
-    title: 'Agenda',
-    icon: IconCalendar,
-    href: '/schedules'
-  },
+  ...(userType === 'SECRETARIA'
+    ? [
+      {
+        id: uniqueId(),
+        title: 'Citas',
+        icon: IconCalendar,
+        href: '/appointments'
+      }
+    ]
+    : []),
+  ...(userType === 'DOCTOR'
+    ? [
+      {
+        id: uniqueId(),
+        title: 'Agenda',
+        icon: IconUser,
+        href: '/schedules'
+      }
+    ]
+    : []),
   {
     navlabel: true,
     subheader: 'Servicios'
