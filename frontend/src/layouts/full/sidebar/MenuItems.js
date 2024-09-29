@@ -28,7 +28,7 @@ const Menuitems = [
     navlabel: true,
     subheader: 'Usuarios y Pacientes'
   },
-  ...(userType === 'ADMINISTRATOR'
+  ...(userType === 'ADMINISTRADOR'
     ? [
       {
         id: uniqueId(),
