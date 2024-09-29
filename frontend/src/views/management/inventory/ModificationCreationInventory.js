@@ -21,7 +21,7 @@ const ModificationCreationInventory = () => {
       quantity
     };
     if (isEditing) {
-      itemDataToUpdate.id = itemId; 
+      itemDataToUpdate.id = itemId;
       return handleUpdate(parseInt(itemData.id), itemDataToUpdate);
     } else {
       return handleCreate(itemDataToUpdate);
@@ -96,7 +96,7 @@ const ModificationCreationInventory = () => {
               <Typography variant="subtitle1" fontWeight={600} component="label" htmlFor="quantity" mb="5px">
                 Cantidad
               </Typography>
-              <CustomTextField id="quantity" variant="outlined" fullWidth value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+              <CustomTextField id="quantity" variant="outlined" fullWidth type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} inputProps={{ step: "0.01" }} />
             </Box>
             <Box>
               <Button color="primary" variant="contained" size="large" fullWidth onClick={handleSubmit}>

@@ -30,24 +30,15 @@ const InventoryList = () => {
         return response.json();
       })
       .then((data) => {
-        setItems(data.records || []); // Aquí ajustamos para acceder a data.records
-        setTotalItems(data.totalRecords || 0); // Ajustamos para acceder a data.totalRecords
+        setItems(data.records || []); 
+        setTotalItems(data.totalRecords || 0);
         setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching inventory items:', error);
-        setError('Error al obtener los artículos del inventario.');
+        setError('No hay registros en el inventario.');
         setLoading(false);
       });
-  };
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
   };
 
   const createItem = () => {
@@ -138,18 +129,6 @@ const InventoryList = () => {
               </TableRow>
             ))}
           </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[10, 25, 50]}
-                count={totalItems}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
-            </TableRow>
-          </TableFooter>
         </Table>
       )}
     </>

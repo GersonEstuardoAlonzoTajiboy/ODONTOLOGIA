@@ -36,18 +36,9 @@ const TreatmentPlanList = () => {
       })
       .catch((error) => {
         console.error('Error fetching inventory items:', error);
-        setError('Error al obtener los artículos de los planes de tratamientos.');
+        setError('No hay tratamientos registrados.');
         setLoading(false);
       });
-  };
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
   };
 
   const createItem = () => {
@@ -136,18 +127,6 @@ const TreatmentPlanList = () => {
               </TableRow>
             ))}
           </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[10, 25, 50]}
-                count={totalItems}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
-            </TableRow>
-          </TableFooter>
         </Table>
       )}
     </>

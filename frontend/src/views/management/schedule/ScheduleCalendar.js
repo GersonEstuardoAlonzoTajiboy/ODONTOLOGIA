@@ -34,18 +34,9 @@ const ScheduleCalendar = () => {
       })
       .catch((error) => {
         console.error('Error fetching schedules:', error);
-        setError('Error al obtener los horarios.');
+        setError('Agenda');
         setLoading(false);
       });
-  };
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
   };
 
   if (loading) {
@@ -74,18 +65,6 @@ const ScheduleCalendar = () => {
           </TableRow>
         ))}
       </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 50]}
-            count={totalSchedules}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </TableRow>
-      </TableFooter>
     </Table>
   );
 };

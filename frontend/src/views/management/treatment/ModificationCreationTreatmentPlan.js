@@ -110,8 +110,10 @@ const ModificationCreationTreatmentPlan = () => {
               <CustomTextField
                 id="description"
                 variant="outlined"
+                type="number"
                 fullWidth value={estimatedCost}
                 onChange={(e) => setEstimatedCost(e.target.value)}
+                inputProps={{ step: "0.01" }}
               />
             </Box>
             <Box>
