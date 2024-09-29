@@ -1,6 +1,7 @@
 import { Sequelize, DataTypes } from 'sequelize';
 import { bd, user, password, host, port } from '../database/database.js';
 import Patient from './Patient.js';
+import User from './User.js';
 
 const sequelize = new Sequelize(bd, user, password, {
   host: host,
@@ -39,5 +40,6 @@ const Appointment = sequelize.define('appointment', {
 });
 
 Appointment.belongsTo(Patient, { foreignKey: 'patient_id' });
+Appointment.belongsTo(User, { foreignKey: 'user_id' });
 
 export default Appointment;

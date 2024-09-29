@@ -40,7 +40,7 @@ const User = sequelize.define('user', {
     allowNull: false
   },
   type_of_user: {
-    type: DataTypes.ENUM('ADMINISTRATOR', 'DOCTOR'),
+    type: DataTypes.ENUM('ADMINISTRADOR', 'DOCTOR', 'SECRETARIA'),
     allowNull: false
   },
   status: {

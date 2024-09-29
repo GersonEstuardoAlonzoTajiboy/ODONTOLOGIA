@@ -6,7 +6,8 @@ CREATE PROCEDURE procedure_to_register_appointment_schedule(
     IN p_appointment_datetime DATETIME,
     IN p_reason VARCHAR(255),
     IN p_notes TEXT,
-    IN p_patient_id INT
+    IN p_patient_id INT,
+    IN p_user_id INT
 )
 BEGIN 
     DECLARE v_appointment_id INT;
@@ -16,8 +17,8 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error registering appointment and schedule.';
     END;
     START TRANSACTION;
-        INSERT INTO appointment (appointment_datetime, reason, notes, createdAt, updatedAt, patient_id)
-        VALUES (p_appointment_datetime, p_reason, p_notes, NOW(), NOW(), p_patient_id);
+        INSERT INTO appointment (appointment_datetime, reason, notes, createdAt, updatedAt, patient_id, user_id)
+        VALUES (p_appointment_datetime, p_reason, p_notes, NOW(), NOW(), p_patient_id, p_user_id);
         SELECT LAST_INSERT_ID() INTO v_appointment_id;
         INSERT INTO schedule (date, createdAt, updatedAt, appointment_id)
         VALUES (DATE(p_appointment_datetime), NOW(), NOW(), v_appointment_id);        

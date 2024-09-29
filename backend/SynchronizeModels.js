@@ -32,6 +32,7 @@ RootCanalTreatment.belongsTo(Patient, { foreignKey: 'patient_id' });
 Patient.hasMany(Appointment, { foreignKey: 'patient_id' });
 Appointment.belongsTo(Patient, { foreignKey: 'patient_id' });
 Appointment.hasOne(Schedule, { foreignKey: 'appointment_id' });
+Appointment.belongsTo(User, { foreignKey: 'user_id' });
 Schedule.belongsTo(Appointment, { foreignKey: 'appointment_id' });
 Patient.hasMany(ClinicalHistory, { foreignKey: 'patient_id' });
 ClinicalHistory.belongsTo(Patient, { foreignKey: 'patient_id' });
