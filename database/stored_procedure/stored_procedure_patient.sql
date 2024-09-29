@@ -32,9 +32,12 @@ CREATE PROCEDURE procedure_to_update_patient(
     IN p_id INT,
     IN p_full_name VARCHAR(255),
     IN p_address VARCHAR(255),
+    IN p_email VARCHAR(50),
+    IN p_phone VARCHAR(8),
     IN p_sex CHAR(1),
     IN p_birth_date DATE,
-    IN p_emergency_contact VARCHAR(255),
+    IN p_name_contact VARCHAR(255),
+    IN p_relationship VARCHAR(50),
     IN p_emergency_phone VARCHAR(8)
 )
 BEGIN 
@@ -50,9 +53,12 @@ BEGIN
         UPDATE patient
         SET full_name = p_full_name,
             address = p_address,
+            email = p_email,
+            phone = p_phone,
             sex = p_sex,
             birth_date = p_birth_date,
-            emergency_contact = p_emergency_contact,
+            name_contact = p_name_contact,
+            relationship = p_relationship,
             emergency_phone = p_emergency_phone,
             updatedAt = NOW()
         WHERE id = p_id;
@@ -96,3 +102,5 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
+
+SELECT * FROM patient;

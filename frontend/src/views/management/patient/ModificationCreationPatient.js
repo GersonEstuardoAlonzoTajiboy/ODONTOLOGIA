@@ -16,7 +16,7 @@ const ModificationCreationPatient = () => {
   const [phone, setPhone] = useState(isEditing ? patientData.phone : '');
   const [sex, setSex] = useState(isEditing ? patientData.sex : '');
   const [birthDate, setBirthDate] = useState(isEditing ? patientData.birth_date : '');
-  const [nameContact, setNameContact] = useState(isEditing ? patientData.emergency_contact : '');
+  const [nameContact, setNameContact] = useState(isEditing ? patientData.name_contact : '');
   const [relationship, setRelationship] = useState(isEditing ? patientData.relationship : '');
   const [emergencyPhone, setEmergencyPhone] = useState(isEditing ? patientData.emergency_phone : '');
 

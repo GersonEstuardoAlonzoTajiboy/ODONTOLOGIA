@@ -28,7 +28,7 @@ export const registerPatient = async (req, res, next) => {
 export const updatePatient = async (req, res, next) => {
   const transaction = await sequelize.transaction();
   try {
-    const { id, full_name, address, sex, birth_date, emergency_contact, emergency_phone } = req.body;
+    const { id, full_name, address, email, phone, sex, birth_date, name_contact, relationship, emergency_phone } = req.body;
     const existingPatient = await Patient.findByPk(id, { transaction });
     if (!existingPatient) {
       await transaction.rollback();
@@ -38,8 +38,8 @@ export const updatePatient = async (req, res, next) => {
       await transaction.rollback();
       return res.status(400).json({ message: 'Patient exists but is logically deleted.' });
     }
-    await sequelize.query('CALL procedure_to_update_patient(:id, :full_name, :address, :sex, :birth_date, :emergency_contact, :emergency_phone)', {
-      replacements: { id: id, full_name: full_name, address: address, sex: sex, birth_date: birth_date, emergency_contact: emergency_contact, emergency_phone: emergency_phone },
+    await sequelize.query('CALL procedure_to_update_patient(:id, :full_name, :address, :email, :phone, :sex, :birth_date, :name_contact, :relationship, :emergency_phone)', {
+      replacements: { id: id, full_name: full_name, address: address, email: email, phone: phone, sex: sex, birth_date: birth_date, name_contact: name_contact, relationship: relationship, emergency_phone: emergency_phone },
       transaction: transaction
     });
     await transaction.commit();
