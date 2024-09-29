@@ -160,6 +160,7 @@ const ModificationCreationPatient = () => {
                 variant="outlined"
                 fullWidth value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+                inputProps={{ maxLength: 100 }}
               />
             </Box>
             <Box>
@@ -246,6 +247,7 @@ const ModificationCreationPatient = () => {
                 variant="outlined"
                 fullWidth value={emergencyPhone}
                 onChange={(e) => setEmergencyPhone(e.target.value)}
+                inputProps={{ maxLength: 100 }}
               />
             </Box>
             <Box>
