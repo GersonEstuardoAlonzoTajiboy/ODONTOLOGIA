@@ -153,3 +153,37 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE procedure_get_doctor_schedule(
+    IN p_user_id INT -- ID del doctor
+)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error fetching doctor schedule.';
+    END;
+    START TRANSACTION;
+    SELECT 
+        s.id AS schedule_id,
+        s.date AS schedule_date,
+        a.id AS appointment_id,
+        a.appointment_datetime,
+        a.reason,
+        a.notes,
+        p.full_name AS patient_name,
+        a.state AS appointment_status
+    FROM 
+        schedule s
+    JOIN 
+        appointment a ON s.appointment_id = a.id
+    JOIN 
+        patient p ON a.patient_id = p.id
+    WHERE 
+        a.user_id = p_user_id 
+        AND s.status = TRUE     
+        AND a.state = 'SCHEDULED'; 
+    COMMIT;
+END //
+DELIMITER ;

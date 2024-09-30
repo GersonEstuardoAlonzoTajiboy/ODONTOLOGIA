@@ -16,7 +16,8 @@ router.patch('/appointment', verifyToken, deleteLogicallyAppointment);
 // ENDPOINT - APPOINTMENT LIST
 router.get('/appointment', verifyToken, appointmentList);
 
-// ENDPOINT - SCHEDULE LIST
-router.get('/schedule', verifyToken, scheduleList);
+// ENDPOINT - SCHEDULE LIST (ahora recibe el userId como parámetro en la URL)
+router.get('/schedule/:userId', scheduleList);
+
 
 export default router;

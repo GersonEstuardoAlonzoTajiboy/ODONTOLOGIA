@@ -121,32 +121,29 @@ export const appointmentList = async (req, res, next) => {
 
 export const scheduleList = async (req, res, next) => {
   try {
-    const { page = 1, limit = 10 } = req.query;
-    const numericLimit = parseInt(limit, 10);
-    const numericPage = parseInt(page, 10);
-    const offset = (numericPage - 1) * numericLimit;
-    const { count: totalSchedules, rows: schedules } = await Schedule.findAndCountAll({
-      where: { status: true },
-      limit: numericLimit,
-      offset,
-      include: [{
-        model: Appointment,
-        attributes: ['reason'],
-        include: [{
-          model: Patient,
-          attributes: ['full_name']
-        }]
-      }]
-    });
-    const totalPages = Math.ceil(totalSchedules / numericLimit);
+    const { userId } = req.params;
+    const schedules = await sequelize.query(
+      'CALL procedure_get_doctor_schedule(:userId)',
+      {
+        replacements: { userId },
+        type: sequelize.QueryTypes.RAW
+      }
+    );
     if (!schedules || schedules.length === 0) {
       return res.status(404).json({ message: 'No schedules found.' });
     }
+    const formattedSchedules = schedules.map(schedule => ({
+      schedule_id: schedule.schedule_id,
+      schedule_date: schedule.schedule_date,
+      appointment_id: schedule.appointment_id,
+      appointment_datetime: schedule.appointment_datetime,
+      reason: schedule.reason,
+      notes: schedule.notes,
+      patient_name: schedule.patient_name,
+      appointment_status: schedule.appointment_status
+    }));
     res.json({
-      totalSchedules,
-      totalPages,
-      currentPage: numericPage,
-      schedules
+      schedules: formattedSchedules
     });
   } catch (error) {
     console.error('Error when displaying the list of schedules', error);

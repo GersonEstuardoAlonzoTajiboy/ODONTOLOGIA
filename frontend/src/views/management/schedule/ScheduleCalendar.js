@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { CircularProgress, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
-import { jwtDecode } from 'jwt-decode'; // Entre llaves
+import { jwtDecode } from 'jwt-decode';
 import { SERVIDOR } from '../../../api/Servidor';
 
 const ScheduleCalendar = () => {
   const [schedules, setSchedules] = useState([]);
-  const [totalSchedules, setTotalSchedules] = useState(0);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -28,19 +25,18 @@ const ScheduleCalendar = () => {
   const doctorId = user?.type_of_user === 'DOCTOR' ? user.id : null;
 
   useEffect(() => {
-    if (user) {
-      fetchSchedules(page, rowsPerPage, doctorId);
+    if (doctorId) {
+      fetchSchedules(doctorId);
     }
-  }, [page, rowsPerPage, doctorId]);
+  }, [doctorId]);
 
-  const fetchSchedules = (page, limit, doctorId) => {
+  const fetchSchedules = (doctorId) => {
     const token = localStorage.getItem('token');
     setLoading(true);
     setError(null);
-    let url = `${SERVIDOR}/api/schedule?page=${page + 1}&limit=${limit}`;
-    if (doctorId) {
-      url += `&doctor_id=${doctorId}`;
-    }
+
+    const url = `${SERVIDOR}/api/schedule/${doctorId}`;
+
     fetch(url, {
       headers: { 'x-access-token': token }
     })
@@ -52,7 +48,6 @@ const ScheduleCalendar = () => {
       })
       .then((data) => {
         setSchedules(data.schedules || []);
-        setTotalSchedules(data.totalSchedules || 0);
         setLoading(false);
       })
       .catch((error) => {
@@ -81,10 +76,10 @@ const ScheduleCalendar = () => {
       </TableHead>
       <TableBody>
         {schedules.map((schedule) => (
-          <TableRow key={schedule.id}>
-            <TableCell sx={{ fontSize: '15px' }}>{schedule.date}</TableCell>
-            <TableCell sx={{ fontSize: '15px' }}>{schedule.appointment?.patient?.full_name}</TableCell>
-            <TableCell sx={{ fontSize: '15px' }}>{schedule.appointment?.reason}</TableCell>
+          <TableRow key={schedule.schedule_id}>
+            <TableCell sx={{ fontSize: '15px' }}>{schedule.schedule_date}</TableCell>
+            <TableCell sx={{ fontSize: '15px' }}>{schedule.patient_name}</TableCell>
+            <TableCell sx={{ fontSize: '15px' }}>{schedule.reason}</TableCell>
           </TableRow>
         ))}
       </TableBody>
