@@ -235,9 +235,10 @@ const ModificationCreationAppointment = () => {
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
                 >
-                  <MenuItem value="SCHEDULED">Programada</MenuItem>
-                  <MenuItem value="CANCELED">Cancelada</MenuItem>
-                  <MenuItem value="COMPLETED">Completada</MenuItem>
+                  <MenuItem value="PROGRAMADA">Programada</MenuItem>
+                  <MenuItem value="CANCELADA">Cancelada</MenuItem>
+                  <MenuItem value="CONFIRMADA">Confirmada</MenuItem>
+                  <MenuItem value="COMPLETADA">Completada</MenuItem>
                 </Select>
               </Box>
             )}
