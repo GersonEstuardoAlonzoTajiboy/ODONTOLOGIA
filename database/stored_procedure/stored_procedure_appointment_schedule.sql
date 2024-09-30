@@ -17,8 +17,8 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error registering appointment and schedule.';
     END;
     START TRANSACTION;
-        INSERT INTO appointment (appointment_datetime, reason, notes, createdAt, updatedAt, patient_id, user_id)
-        VALUES (p_appointment_datetime, p_reason, p_notes, NOW(), NOW(), p_patient_id, p_user_id);
+        INSERT INTO appointment (appointment_datetime, reason, notes, createdAt, updatedAt, patient_id, user_id, code_id)
+        VALUES (p_appointment_datetime, p_reason, p_notes, NOW(), NOW(), p_patient_id, p_user_id, uuid());
         SELECT LAST_INSERT_ID() INTO v_appointment_id;
         INSERT INTO schedule (date, createdAt, updatedAt, appointment_id)
         VALUES (DATE(p_appointment_datetime), NOW(), NOW(), v_appointment_id);        

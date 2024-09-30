@@ -31,6 +31,10 @@ const Appointment = sequelize.define('appointment', {
     type: DataTypes.TEXT,
     allowNull: true
   },
+  code_id: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
   status: {
     type: DataTypes.BOOLEAN,
     defaultValue: true
