@@ -2,7 +2,6 @@ import React, { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import Loadable from '../layouts/full/shared/loadable/Loadable';
 import ProtectedRoute from './ProtectedRoute';
-import CreationMedicalImage from '../views/management/patient/medical-image/CrationMedicalImage';
 
 /* ****Layouts**** */
 const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
@@ -17,6 +16,7 @@ const Login = Loadable(lazy(() => import('../views/authentication/Login')));
 
 /* ****Usuarios y Pacientes**** */
 const UserList = Loadable(lazy(() => import('../views/management/user/UserList')));
+const DoctorList = Loadable(lazy(() => import('../views/management/doctor/DoctorList')));
 const ModificationCreationUser = Loadable(lazy(() => import('../views/management/user/ModificationCreationUser')));
 const PatientList = Loadable(lazy(() => import('../views/management/patient/PatientList')));
 const ModificationCreationPatient = Loadable(lazy(() => import('../views/management/patient/ModificationCreationPatient')));
@@ -69,6 +69,11 @@ const Router = [
         element: (<ProtectedRoute> <ModificationCreationUser /> </ProtectedRoute>)
       },
       {
+        path: '/doctors',
+        exact: true,
+        element: (<ProtectedRoute> <DoctorList /> </ProtectedRoute>)
+      },
+      {
         path: '/patients',
         exact: true,
         element: (<ProtectedRoute> <PatientList /> </ProtectedRoute>)
@@ -101,7 +106,7 @@ const Router = [
       {
         path: '/ui/create-medical-image/:id',
         exact: true,
-        element: (<ProtectedRoute> <CreationMedicalImage /> </ProtectedRoute>)
+        element: (<ProtectedRoute> <CrationMedicalImage /> </ProtectedRoute>)
       },
       {
         path: '/appointments',

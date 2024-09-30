@@ -26,7 +26,7 @@ const Menuitems = [
   },
   {
     navlabel: true,
-    subheader: 'Usuarios y Pacientes'
+    subheader: 'Personas'
   },
   ...(userType === 'ADMINISTRADOR'
     ? [
@@ -40,16 +40,22 @@ const Menuitems = [
     : []),
   {
     id: uniqueId(),
+    title: 'Doctores',
+    icon: IconUser,
+    href: '/doctors'
+  },
+  {
+    id: uniqueId(),
     title: 'Pacientes',
     icon: IconUser,
     href: '/patients'
   },
-  {
-    navlabel: true,
-    subheader: 'Agenda y Citas'
-  },
   ...(userType === 'SECRETARIA'
     ? [
+      {
+        navlabel: true,
+        subheader: 'Citas'
+      },
       {
         id: uniqueId(),
         title: 'Citas',
@@ -60,6 +66,10 @@ const Menuitems = [
     : []),
   ...(userType === 'DOCTOR'
     ? [
+      {
+        navlabel: true,
+        subheader: 'Agenda'
+      },
       {
         id: uniqueId(),
         title: 'Agenda',
