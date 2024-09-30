@@ -1,6 +1,6 @@
 import express from 'express';
 import verifyToken from '../middleware/verifyToken.js';
-import { registerUser, loginUser, updateUser, deleteLogicallyUser, userList } from '../controller/UserController.js';
+import { registerUser, loginUser, updateUser, deleteLogicallyUser, userList, listDoctors } from '../controller/UserController.js';
 
 const router = express.Router();
 
@@ -19,4 +19,6 @@ router.patch('/user', verifyToken, deleteLogicallyUser);
 // ENDPOINT - USER LIST
 router.get('/user', verifyToken, userList);
 
-export default router; 
+router.get('/user/doctors', verifyToken, listDoctors);
+
+export default router;

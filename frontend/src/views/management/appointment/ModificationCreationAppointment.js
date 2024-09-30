@@ -22,6 +22,8 @@ const ModificationCreationAppointment = () => {
   const [status, setStatus] = useState(isEditing ? appointmentData.state : '');
   const [patientId, setPatientId] = useState(isEditing ? appointmentData.patient_id : '');
   const [patients, setPatients] = useState([]);
+  const [userId, setUserId] = useState(isEditing ? appointmentData.user_id : '');
+  const [users, setUsers] = useState([]);
 
   const fetchPatients = async () => {
     try {
@@ -42,8 +44,28 @@ const ModificationCreationAppointment = () => {
     }
   };
 
+  const fetchUserDoctors = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${SERVIDOR}/api/user/doctors`, {
+        headers: {
+          'x-access-token': token
+        }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setUsers(data);
+      } else {
+        console.error('Error al cargar la lista de doctores');
+      }
+    } catch (error) {
+      console.error('Error al cargar la lista de doctores:', error);
+    }
+  };
+
   useEffect(() => {
     fetchPatients();
+    fetchUserDoctors();
   }, []);
 
   const handleSubmit = async () => {
@@ -52,6 +74,7 @@ const ModificationCreationAppointment = () => {
       reason,
       notes,
       patient_id: patientId,
+      user_id: userId,
       state: status
     };
     if (isEditing) {
@@ -180,6 +203,23 @@ const ModificationCreationAppointment = () => {
               >
                 {patients.map(patient => (
                   <MenuItem key={patient.id} value={patient.id}>{patient.full_name}</MenuItem>
+                ))}
+              </Select>
+            </Box>
+            <Box>
+              <Typography variant="subtitle1" fontWeight={600} component="label" htmlFor="users" mb="5px">
+                Doctor
+              </Typography>
+              <Select
+                id="users"
+                variant="outlined"
+                fullWidth
+                value={userId}
+                onChange={(e) => setUserId(e.target.value)}
+                disabled={isEditing}
+              >
+                {users.map(user => (
+                  <MenuItem key={user.id} value={user.id}>{`${user.name} ${user.last_name}`}</MenuItem>
                 ))}
               </Select>
             </Box>

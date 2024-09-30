@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableHead, TableRow, Button, TableFooter, TablePagination, CircularProgress, Typography } from '@mui/material';
+import { Table, TableBody, TableCell, TableHead, TableRow, Button, CircularProgress, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { SERVIDOR } from '../../../api/Servidor';

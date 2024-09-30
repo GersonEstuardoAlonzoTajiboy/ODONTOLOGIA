@@ -151,3 +151,19 @@ export const userList = async (req, res, next) => {
     res.status(500).send('Internal Server Error.');
   }
 };
+
+export const listDoctors = async (req, res, next) => {
+  try {
+    const doctors = await User.findAll({
+      where: { type_of_user: 'DOCTOR', status: true },
+      attributes: { exclude: ['password'] }
+    });
+    if (!doctors || doctors.length === 0) {
+      return res.status(404).json({ message: 'No doctors found.' });
+    }
+    res.json(doctors);
+  } catch (error) {
+    console.error('Error listing doctors', error);
+    res.status(500).send('Internal Server Error.');
+  }
+};

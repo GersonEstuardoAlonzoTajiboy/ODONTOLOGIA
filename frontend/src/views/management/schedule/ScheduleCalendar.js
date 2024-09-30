@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { CircularProgress, Table, TableBody, TableCell, TableFooter, TableHead, TablePagination, TableRow } from '@mui/material';
+import { CircularProgress, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import { jwtDecode } from 'jwt-decode'; // Entre llaves
 import { SERVIDOR } from '../../../api/Servidor';
 
 const ScheduleCalendar = () => {
@@ -10,15 +11,37 @@ const ScheduleCalendar = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchSchedules(page, rowsPerPage);
-  }, [page, rowsPerPage]);
+  const getUserFromToken = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        return jwtDecode(token);
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        return null;
+      }
+    }
+    return null;
+  };
 
-  const fetchSchedules = (page, limit) => {
+  const user = getUserFromToken();
+  const doctorId = user?.type_of_user === 'DOCTOR' ? user.id : null;
+
+  useEffect(() => {
+    if (user) {
+      fetchSchedules(page, rowsPerPage, doctorId);
+    }
+  }, [page, rowsPerPage, doctorId]);
+
+  const fetchSchedules = (page, limit, doctorId) => {
     const token = localStorage.getItem('token');
     setLoading(true);
     setError(null);
-    fetch(`${SERVIDOR}/api/schedule?page=${page + 1}&limit=${limit}`, {
+    let url = `${SERVIDOR}/api/schedule?page=${page + 1}&limit=${limit}`;
+    if (doctorId) {
+      url += `&doctor_id=${doctorId}`;
+    }
+    fetch(url, {
       headers: { 'x-access-token': token }
     })
       .then((response) => {
@@ -34,7 +57,7 @@ const ScheduleCalendar = () => {
       })
       .catch((error) => {
         console.error('Error fetching schedules:', error);
-        setError('Agenda');
+        setError('Error al obtener la agenda');
         setLoading(false);
       });
   };

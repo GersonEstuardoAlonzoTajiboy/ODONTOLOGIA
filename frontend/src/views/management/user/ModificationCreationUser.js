@@ -126,8 +126,9 @@ const ModificationCreationUser = () => {
               <FormControl fullWidth variant="outlined">
                 <InputLabel id="type_of_user_label">Tipo de Usuario</InputLabel>
                 <Select labelId="type_of_user_label" id="type_of_user" label="Tipo de Usuario" name="type_of_user" value={typeOfUser} onChange={(e) => setTypeOfUser(e.target.value)}>
+                  <MenuItem value="ADMINISTRADOR">Administrador</MenuItem>
                   <MenuItem value="DOCTOR">Doctor</MenuItem>
-                  <MenuItem value="ADMINISTRATOR">Administrador</MenuItem>
+                  <MenuItem value="SECRETARIA">Secretaria</MenuItem>
                 </Select>
               </FormControl>
             </Box>
