@@ -127,6 +127,7 @@ const PatientList = () => {
               <TableCell sx={{ fontSize: '15px' }}>Cuestionario</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Evaluación</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Tratamientos</TableCell>
+              <TableCell sx={{ fontSize: '15px' }}>Presupuesto</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Imagenes</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Historial</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Editar</TableCell>
@@ -174,6 +175,18 @@ const PatientList = () => {
                     }
                   >
                     Tratamiento
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    onClick={() =>
+                      navigate(`/ui/create-budget/${patient.id}`, { state: { patient: patient } })
+                    }
+                  >
+                    Presupuesto
                   </Button>
                 </TableCell>
                 <TableCell>

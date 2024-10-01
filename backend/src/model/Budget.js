@@ -21,6 +21,10 @@ const Budget = sequelize.define('budget', {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: true
   },
+  creation_date: {
+    type: DataTypes.DATEONLY,
+    allowNull: false
+  },
   status: {
     type: DataTypes.BOOLEAN,
     defaultValue: true

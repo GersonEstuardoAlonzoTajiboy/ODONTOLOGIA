@@ -29,6 +29,10 @@ const RootCanalTreatment = sequelize.define('root_canal_treatment', {
     type: DataTypes.TEXT,
     allowNull: true
   },
+  creation_date: {
+    type: DataTypes.DATEONLY,
+    allowNull: false
+  },
   status: {
     type: DataTypes.BOOLEAN,
     defaultValue: true

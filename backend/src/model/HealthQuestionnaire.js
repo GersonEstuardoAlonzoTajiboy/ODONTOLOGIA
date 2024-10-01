@@ -61,6 +61,10 @@ const HealthQuestionnaire = sequelize.define('health_questionnaire', {
     type: DataTypes.BOOLEAN,
     allowNull: true
   },
+  creation_date: {
+    type: DataTypes.DATEONLY,
+    allowNull: false
+  },
   status: {
     type: DataTypes.BOOLEAN,
     defaultValue: true

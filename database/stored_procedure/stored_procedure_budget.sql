@@ -20,7 +20,8 @@ BEGIN
     WHILE v_idx < v_treatment_count DO
         SET v_treatment = JSON_UNQUOTE(JSON_EXTRACT(p_treatments_json, CONCAT('$[', v_idx, '].treatment')));
         SET v_cost = JSON_UNQUOTE(JSON_EXTRACT(p_treatments_json, CONCAT('$[', v_idx, '].cost')));
-        INSERT INTO budget (treatment, cost, createdAt, updatedAt, patient_id) VALUES (v_treatment, v_cost, NOW(), NOW(), p_patient_id);
+        INSERT INTO budget (treatment, cost, createdAt, updatedAt, patient_id, creation_date) 
+        VALUES (v_treatment, v_cost, NOW(), NOW(), p_patient_id, NOW());
         SET v_idx = v_idx + 1;
     END WHILE;
     COMMIT;

@@ -22,7 +22,7 @@ const Treatment = sequelize.define('treatment', {
     allowNull: true
   },
   date: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     allowNull: true
   },
   status: {

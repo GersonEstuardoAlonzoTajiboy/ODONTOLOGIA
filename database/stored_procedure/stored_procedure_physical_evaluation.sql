@@ -16,9 +16,9 @@ BEGIN
     END;
     START TRANSACTION; 
         INSERT INTO physical_evaluation (
-            blood_pressure, blood_sugar, last_treatment, other_data, createdAt, updatedAt, patient_id
+            blood_pressure, blood_sugar, last_treatment, other_data, createdAt, updatedAt, patient_id, creation_date
         ) VALUES (
-            p_blood_pressure, p_blood_sugar, p_last_treatment, p_other_data, NOW(), NOW(), p_patient_id
+            p_blood_pressure, p_blood_sugar, p_last_treatment, p_other_data, NOW(), NOW(), p_patient_id, NOW()
         );
     COMMIT;
 END //
