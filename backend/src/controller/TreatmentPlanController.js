@@ -69,7 +69,6 @@ export const deleteLogicallyTreatmentPlan = async (req, res, next) => {
 
 export const treatmentPlanList = async (req, res, next) => {
   try {
-    console.log('Executing SQL query directly...');
     const [results] = await sequelize.query(`
       SELECT 
         tp.id AS treatment_plan_id,
