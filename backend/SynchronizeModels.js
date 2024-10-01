@@ -7,7 +7,7 @@ import Patient from './src/model/Patient.js';
 import HealthQuestionnaire from './src/model/HealthQuestionnaire.js';
 import PhysicalEvaluation from './src/model/PhysicalEvaluation.js';
 import Treatment from './src/model/Treatment.js';
-import Budget from './src/model/Budget';
+import Budget from './src/model/Budget.js';
 import RootCanalTreatment from './src/model/RootCanalTreatment.js';
 import Appointment from './src/model/Appointment.js';
 import Schedule from './src/model/Schedule.js';
