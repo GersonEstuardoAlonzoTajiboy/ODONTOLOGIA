@@ -13,6 +13,7 @@ import Schedule from './src/model/Schedule.js';
 import ClinicalHistory from './src/model/ClinicalHistory.js';
 import MedicalImage from './src/model/MedicalImage.js';
 import TreatmentPlan from './src/model/TreatmentPlan.js';
+import TreatmentCategory from './src/model/TreatmentCategory.js';
 
 const sequelize = new Sequelize(bd, user, password, {
   host: host,
@@ -28,7 +29,6 @@ Patient.hasMany(Treatment, { foreignKey: 'patient_id' });
 Treatment.belongsTo(Patient, { foreignKey: 'patient_id' });
 Patient.hasMany(Budget, { foreignKey: 'patient_id' });
 Budget.belongsTo(Patient, { foreignKey: 'patient_id' });
-Patient.hasMany(RootCanalTreatment, { foreignKey: 'patient_id' });
 Patient.hasMany(Appointment, { foreignKey: 'patient_id' });
 Appointment.belongsTo(Patient, { foreignKey: 'patient_id' });
 Appointment.hasOne(Schedule, { foreignKey: 'appointment_id' });
@@ -38,6 +38,8 @@ Patient.hasMany(ClinicalHistory, { foreignKey: 'patient_id' });
 ClinicalHistory.belongsTo(Patient, { foreignKey: 'patient_id' });
 Patient.hasMany(MedicalImage, { foreignKey: 'patient_id' });
 MedicalImage.belongsTo(Patient, { foreignKey: 'patient_id' });
+TreatmentPlan.belongsTo(TreatmentCategory, { foreignKey: 'treatment_category_id' });
+TreatmentCategory.hasMany(TreatmentPlan, { foreignKey: 'treatment_category_id' });
 
 (async () => {
   try {
@@ -53,6 +55,7 @@ MedicalImage.belongsTo(Patient, { foreignKey: 'patient_id' });
     await Schedule.sync();
     await ClinicalHistory.sync();
     await MedicalImage.sync();
+    await TreatmentCategory.sync();
     await TreatmentPlan.sync();
     console.log('All tables have been created.');
   } catch (error) {

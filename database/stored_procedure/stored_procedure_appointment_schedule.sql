@@ -33,11 +33,11 @@ CREATE PROCEDURE procedure_to_update_appointment_schedule(
     IN p_appointment_datetime DATETIME,
     IN p_reason VARCHAR(255),
     IN p_notes TEXT,
-    IN p_state ENUM('SCHEDULED', 'CANCELED', 'COMPLETED')
+    IN p_state ENUM('PROGRAMADA', 'CANCELADA', 'CONFIRMADA', 'COMPLETADA')
 )
 BEGIN 
     DECLARE v_schedule_id INT;
-    DECLARE v_old_status ENUM('SCHEDULED', 'CANCELED', 'COMPLETED');
+    DECLARE v_old_status ENUM('PROGRAMADA', 'CANCELADA', 'CONFIRMADA', 'COMPLETADA');
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
         ROLLBACK;
@@ -54,7 +54,7 @@ BEGIN
         state = p_state,
         updatedAt = NOW()
     WHERE id = p_id;
-    IF v_old_status = 'SCHEDULED' AND p_state = 'SCHEDULED' THEN
+    IF v_old_status = 'PROGRAMADA' AND p_state = 'PROGRAMADA' THEN
         SELECT id INTO v_schedule_id
         FROM schedule
         WHERE appointment_id = p_id;
@@ -65,7 +65,7 @@ BEGIN
             WHERE id = v_schedule_id;
         END IF;
     END IF;
-    IF v_old_status = 'SCHEDULED' AND p_state = 'CANCELED' THEN
+    IF v_old_status = 'PROGRAMADA' AND p_state = 'CANCELADA' THEN
         SELECT id INTO v_schedule_id
         FROM schedule
         WHERE appointment_id = p_id;
@@ -76,7 +76,7 @@ BEGIN
             WHERE id = v_schedule_id;
         END IF;
     END IF;
-    IF v_old_status = 'SCHEDULED' AND p_state = 'COMPLETED' THEN
+    IF v_old_status = 'PROGRAMADA' AND p_state = 'COMPLETADA' THEN
         SELECT id INTO v_schedule_id
         FROM schedule
         WHERE appointment_id = p_id;
@@ -91,7 +91,7 @@ BEGIN
             updatedAt = NOW()
         WHERE id = p_id;
     END IF;
-    IF v_old_status = 'CANCELED' AND p_state = 'SCHEDULED' THEN
+    IF v_old_status = 'CANCELADA' AND p_state = 'PROGRAMADA' THEN
         SELECT id INTO v_schedule_id
         FROM schedule
         WHERE appointment_id = p_id;
