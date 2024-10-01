@@ -180,7 +180,7 @@ const CreationHealthQuestionnaire = () => {
       cost: parseFloat(b.cost)
     }));
     const requestDataBudget = {
-      budget_json: budgetData,
+      treatments_json: budgetData,
       patient_id: patientId
     };
     try {
