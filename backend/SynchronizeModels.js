@@ -11,7 +11,6 @@ import RootCanalTreatment from './src/model/RootCanalTreatment.js';
 import Appointment from './src/model/Appointment.js';
 import Schedule from './src/model/Schedule.js';
 import ClinicalHistory from './src/model/ClinicalHistory.js';
-import Inventory from './src/model/Inventory.js';
 import MedicalImage from './src/model/MedicalImage.js';
 import TreatmentPlan from './src/model/TreatmentPlan.js';
 
@@ -52,7 +51,6 @@ MedicalImage.belongsTo(Patient, { foreignKey: 'patient_id' });
     await Appointment.sync();
     await Schedule.sync();
     await ClinicalHistory.sync();
-    await Inventory.sync();
     await MedicalImage.sync();
     await TreatmentPlan.sync();
     console.log('All tables have been created.');
