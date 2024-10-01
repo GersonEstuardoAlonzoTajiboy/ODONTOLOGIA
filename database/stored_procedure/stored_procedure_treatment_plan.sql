@@ -83,6 +83,30 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE procedure_to_get_treatment_plans_with_categories()
+BEGIN
+    SELECT 
+        tp.id AS treatment_plan_id,
+        tp.plan_details,
+        tp.estimated_cost,
+        tp.createdAt AS treatment_plan_created_at,
+        tc.id AS treatment_category_id,
+        tc.name AS treatment_category_name,
+        tc.createdAt AS treatment_category_created_at
+    FROM 
+        treatment_plan tp
+    INNER JOIN 
+        treatment_category tc 
+    ON 
+        tp.treatment_category_id = tc.id
+    WHERE 
+        tp.status = TRUE AND tc.status = TRUE
+    ORDER BY 
+        tp.createdAt DESC;
+END //
+DELIMITER ;
+
 -- TREATMENT CATEGORY
 DELIMITER // 
 CREATE PROCEDURE procedure_to_register_treatment_category(
@@ -159,3 +183,25 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
+
+CALL procedure_to_register_treatment_plan('Kit de radiografías y plan de tratamiento', 500, 1);
+CALL procedure_to_get_treatment_plans_with_categories();
+
+SELECT 
+        tp.id AS treatment_plan_id,
+        tp.plan_details,
+        tp.estimated_cost,
+        tp.createdAt AS treatment_plan_created_at,
+        tc.id AS treatment_category_id,
+        tc.name AS treatment_category_name,
+        tc.createdAt AS treatment_category_created_at
+    FROM 
+        treatment_plan tp
+    INNER JOIN 
+        treatment_category tc 
+    ON 
+        tp.treatment_category_id = tc.id
+    WHERE 
+        tp.status = TRUE AND tc.status = TRUE
+    ORDER BY 
+        tp.createdAt DESC;

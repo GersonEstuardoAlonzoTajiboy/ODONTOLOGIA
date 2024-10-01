@@ -5,22 +5,19 @@ import { SERVIDOR } from '../../../api/Servidor';
 
 const TreatmentPlanList = () => {
   const [items, setItems] = useState([]);
-  const [totalItems, setTotalItems] = useState(0);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchItems(page, rowsPerPage);
-  }, [page, rowsPerPage]);
+    fetchItems();
+  }, []);
 
-  const fetchItems = (page, limit) => {
+  const fetchItems = () => {
     const token = localStorage.getItem('token');
     setLoading(true);
     setError(null);
-    fetch(`${SERVIDOR}/api/treatment-plan?page=${page + 1}&limit=${limit}`, {
+    fetch(`${SERVIDOR}/api/treatment-plan`, {
       headers: { 'x-access-token': token }
     })
       .then((response) => {
@@ -31,11 +28,10 @@ const TreatmentPlanList = () => {
       })
       .then((data) => {
         setItems(data.records || []);
-        setTotalItems(data.totalRecords || 0);
         setLoading(false);
       })
       .catch((error) => {
-        console.error('Error fetching inventory items:', error);
+        console.error('Error fetching treatment plan items:', error);
         setError('No hay tratamientos registrados.');
         setLoading(false);
       });
@@ -91,6 +87,7 @@ const TreatmentPlanList = () => {
             <TableRow>
               <TableCell sx={{ fontSize: '15px' }}>ID</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Tratamiento</TableCell>
+              <TableCell sx={{ fontSize: '15px' }}>Categoría</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Costo</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Editar</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Eliminar</TableCell>
@@ -99,8 +96,9 @@ const TreatmentPlanList = () => {
           <TableBody>
             {items.map((item) => (
               <TableRow key={item.id}>
-                <TableCell sx={{ fontSize: '15px' }}>{item.id}</TableCell>
+                <TableCell sx={{ fontSize: '15px' }}>{item.treatment_plan_id}</TableCell>
                 <TableCell sx={{ fontSize: '15px' }}>{item.plan_details}</TableCell>
+                <TableCell sx={{ fontSize: '15px' }}>{item.treatment_category_name}</TableCell>
                 <TableCell sx={{ fontSize: '15px' }}>{item.estimated_cost}</TableCell>
                 <TableCell>
                   <Button

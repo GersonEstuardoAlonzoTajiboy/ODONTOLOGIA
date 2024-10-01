@@ -69,28 +69,37 @@ export const deleteLogicallyTreatmentPlan = async (req, res, next) => {
 
 export const treatmentPlanList = async (req, res, next) => {
   try {
-    const { page = 1, limit = 30 } = req.query;
-    const numericLimit = parseInt(limit, 30);
-    const numericPage = parseInt(page, 10);
-    const offset = (numericPage - 1) * numericLimit;
-    const totalTreatmentPlans = await TreatmentPlan.count({ where: { status: true } });
-    const records = await TreatmentPlan.findAll({
-      where: { status: true },
-      limit: numericLimit,
-      offset: offset
-    });
-    const totalPages = Math.ceil(totalTreatmentPlans / numericLimit);
-    if (!records || (Array.isArray(records) && records.length === 0)) {
-      return res.status(404).json({ message: 'No Treatments Plan records found.' });
+    console.log('Executing SQL query directly...');
+    const [results] = await sequelize.query(`
+      SELECT 
+        tp.id AS treatment_plan_id,
+        tp.plan_details,
+        tp.estimated_cost,
+        tp.createdAt AS treatment_plan_created_at,
+        tc.id AS treatment_category_id,
+        tc.name AS treatment_category_name,
+        tc.createdAt AS treatment_category_created_at
+      FROM 
+        treatment_plan tp
+      INNER JOIN 
+        treatment_category tc 
+      ON 
+        tp.treatment_category_id = tc.id
+      WHERE 
+        tp.status = TRUE AND tc.status = TRUE
+      ORDER BY 
+        tp.createdAt DESC;
+    `);
+    const records = results || [];
+    if (records.length === 0) {
+      return res.status(404).json({ message: 'No Treatment Plans found.' });
     }
     res.json({
-      totalTreatmentPlans: totalTreatmentPlans,
-      totalPages: totalPages,
-      currentPage: numericPage,
+      totalTreatmentPlans: records.length,
       records: records
     });
   } catch (error) {
-    console.error('Error when displaying the list of Treatments Plan records', error);
+    console.error('Error when displaying the list of Treatment Plans', error);
     res.status(500).send('Internal Server Error.');
   }
 };
