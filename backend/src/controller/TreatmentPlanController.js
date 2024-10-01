@@ -5,9 +5,9 @@ const sequelize = TreatmentPlan.sequelize;
 export const registerTreatmentPlan = async (req, res, next) => {
   const transaction = await sequelize.transaction();
   try {
-    const { plan_details, estimated_cost } = req.body;
-    await sequelize.query('CALL procedure_to_register_treatment_plan(:plan_details, :estimated_cost)', {
-      replacements: { plan_details: plan_details, estimated_cost: estimated_cost },
+    const { plan_details, estimated_cost, treatment_category_id } = req.body;
+    await sequelize.query('CALL procedure_to_register_treatment_plan(:plan_details, :estimated_cost, :treatment_category_id)', {
+      replacements: { plan_details: plan_details, estimated_cost: estimated_cost, treatment_category_id: treatment_category_id },
       transaction: transaction
     });
     await transaction.commit();
@@ -22,13 +22,13 @@ export const registerTreatmentPlan = async (req, res, next) => {
 export const updateTreatmentPlan = async (req, res, next) => {
   const transaction = await sequelize.transaction();
   try {
-    const { id, plan_details, estimated_cost } = req.body;
+    const { id, plan_details, estimated_cost, treatment_category_id } = req.body;
     const existingTreatmentPlan = await TreatmentPlan.findByPk(id, { transaction });
     if (!existingTreatmentPlan) {
       await transaction.rollback();
       return res.status(400).json({ message: 'Treatment Plan record does not exist.' });
     }
-    await sequelize.query('CALL procedure_to_update_treatment_plan(:id, :plan_details, :estimated_cost)', {
+    await sequelize.query('CALL procedure_to_update_treatment_plan(:id, :plan_details, :estimated_cost, :treatment_category_id)', {
       replacements: { id: id, plan_details: plan_details, estimated_cost: estimated_cost },
       transaction: transaction
     });
