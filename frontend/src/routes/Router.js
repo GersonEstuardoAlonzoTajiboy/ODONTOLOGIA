@@ -37,11 +37,6 @@ const TreatmentPlanList = Loadable(lazy(() => import('../views/management/treatm
 const ModificationCreationTreatmentPlan = Loadable(lazy(() => import('../views/management/treatment/ModificationCreationTreatmentPlan')));
 /* ****** */
 
-/* ****Inventario y Facturación**** */
-const InventoryList = Loadable(lazy(() => import('../views/management/inventory/InventoryList')));
-const ModificationCreationInventory = Loadable(lazy(() => import('../views/management/inventory/ModificationCreationInventory')));
-/* ****** */
-
 const Router = [
   {
     path: '/',
@@ -142,21 +137,6 @@ const Router = [
         path: '/ui/update-treatment-plan/:id',
         exact: true,
         element: (<ProtectedRoute> <ModificationCreationTreatmentPlan /> </ProtectedRoute>)
-      },
-      {
-        path: '/inventory',
-        exact: true,
-        element: (<ProtectedRoute> <InventoryList /> </ProtectedRoute>)
-      },
-      {
-        path: '/ui/create-inventory',
-        exact: true,
-        element: (<ProtectedRoute> <ModificationCreationInventory /> </ProtectedRoute>)
-      },
-      {
-        path: '/ui/update-inventory/:id',
-        exact: true,
-        element: (<ProtectedRoute> <ModificationCreationInventory /> </ProtectedRoute>)
       },
       { path: '*', element: <Navigate to="/auth/404" /> },
     ],
