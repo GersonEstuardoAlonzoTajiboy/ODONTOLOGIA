@@ -183,7 +183,7 @@ BEGIN
     WHERE 
         a.user_id = p_user_id 
         AND s.status = TRUE     
-        AND a.state = 'SCHEDULED'; 
+        AND a.state = 'PROGRAMADA'; 
     COMMIT;
 END //
 DELIMITER ;

@@ -7,30 +7,14 @@ const sequelize = new Sequelize(bd, user, password, {
   dialect: 'mysql'
 });
 
-const RootCanalTreatment = sequelize.define('root_canal_treatment', {
+const TreatmentCategory = sequelize.define('treatment_category', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  tooth_number: {
-    type: DataTypes.STRING(50),
-    allowNull: true
-  },
-  conductometry: {
+  name: {
     type: DataTypes.TEXT,
-    allowNull: true
-  },
-  restoration: {
-    type: DataTypes.BOOLEAN,
-    allowNull: true
-  },
-  other_data: {
-    type: DataTypes.TEXT,
-    allowNull: true
-  },
-  creation_date: {
-    type: DataTypes.DATEONLY,
     allowNull: false
   },
   status: {
@@ -41,4 +25,4 @@ const RootCanalTreatment = sequelize.define('root_canal_treatment', {
   freezeTableName: true
 });
 
-export default RootCanalTreatment;
+export default TreatmentCategory;

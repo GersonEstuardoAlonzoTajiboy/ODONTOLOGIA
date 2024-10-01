@@ -8,7 +8,6 @@ SELECT * FROM health_questionnaire;
 SELECT * FROM physical_evaluation;
 SELECT * FROM treatment;
 SELECT * FROM budget;
-SELECT * FROM root_canal_treatment;
 SELECT * FROM medical_image;
 SELECT * FROM appointment;
 SELECT * FROM schedule;
