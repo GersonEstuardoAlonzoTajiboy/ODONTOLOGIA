@@ -4,11 +4,13 @@ import { Box, Button, Paper, Stack, Typography, Select, MenuItem, FormControl, I
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { SERVIDOR } from '../../../../api/Servidor';
+import { PDFGenerator } from '../../../pdf/PDFGenerator';
 
 const CreationHealthQuestionnaire = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const patientData = state?.patient || {};
+  const fullNamePatient = patientData.full_name || '';
   const patientId = patientData.id || '';
   const patientSex = patientData.sex || '';
   const isFemale = patientSex === 'F';
@@ -33,8 +35,6 @@ const CreationHealthQuestionnaire = () => {
   const [treatments, setTreatments] = useState([{ treatment: '', cost: '', date: '' }]);
   const [budgetItems, setBudgetItems] = useState([{ treatment: '', cost: '' }]);
   const [treatmentPlanList, setTreatmentPlanList] = useState([]);
-
-
 
   useEffect(() => {
     const fetchTreatments = async () => {
@@ -202,7 +202,42 @@ const CreationHealthQuestionnaire = () => {
       console.error('Error al guardar el presupuesto:', error);
       alert('Error al guardar el presupuesto.');
     }
+    generatePDF();
   };
+
+  const generatePDF = () => {
+    const treatmentsData = treatments.map(t => ({
+      treatment: t.treatment,
+      cost: parseFloat(t.cost),
+      date: t.date
+    }));
+    const budgetData = budgetItems.map(b => ({
+      treatment: b.treatment,
+      cost: parseFloat(b.cost)
+    }));
+    PDFGenerator({
+      hypertension,
+      hypertensionControlled,
+      diabetes,
+      diabetesControlled,
+      hospitalized,
+      allergic,
+      excessiveBleeding,
+      seriousIllnesses,
+      isFemale,
+      sheIsPregnant,
+      pregnant,
+      eatenLastSixHours,
+      covidSymptoms,
+      bloodPressure,
+      bloodSugar,
+      lastTreatment,
+      otherData,
+      treatments: treatmentsData,
+      budgetItems: budgetData,
+      fullNamePatient
+    });
+  }
 
   const renderSelect = (label, value, onChange) => (
     <FormControl fullWidth variant="outlined">

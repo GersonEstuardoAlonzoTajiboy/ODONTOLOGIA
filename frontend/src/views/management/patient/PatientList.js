@@ -128,6 +128,7 @@ const PatientList = () => {
               <TableCell sx={{ fontSize: '15px' }}>Dirección</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Sexo</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Ficha medica</TableCell>
+              <TableCell sx={{ fontSize: '15px' }}>Imagenes</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Historial</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Editar</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Eliminar</TableCell>
@@ -150,6 +151,18 @@ const PatientList = () => {
                     }
                   >
                     Generar
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    onClick={() =>
+                      navigate(`/ui/create-medical-image/${patient.id}`, { state: { patient: patient } })
+                    }
+                  >
+                    Imagen
                   </Button>
                 </TableCell>
                 <TableCell>
