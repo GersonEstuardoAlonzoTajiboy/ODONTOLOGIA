@@ -21,10 +21,6 @@ const ModificationCreationUser = Loadable(lazy(() => import('../views/management
 const PatientList = Loadable(lazy(() => import('../views/management/patient/PatientList')));
 const ModificationCreationPatient = Loadable(lazy(() => import('../views/management/patient/ModificationCreationPatient')));
 const CreationHealthQuestionnaire = Loadable(lazy(() => import('../views/management/patient/health-questionnaire/CreationHealthQuestionnaire')));
-const CreationPhysicalEvaluation = Loadable(lazy(() => import('../views/management/patient/physical-evaluation/CreationPhysicalEvaluation')));
-const CreationMultipleTreatments = Loadable(lazy(() => import('../views/management/patient/treatment/CreationMultipleTreatments')));
-const CreationBudget = Loadable(lazy(() => import('../views/management/patient/budget/CreationBudget')));
-const CrationMedicalImage = Loadable(lazy(() => import('../views/management/patient/medical-image/CrationMedicalImage')));
 /* ****** */
 
 /* ****Citas y Agenda**** */
@@ -88,26 +84,6 @@ const Router = [
         path: '/ui/create-health-questionnaire/:id',
         exact: true,
         element: (<ProtectedRoute> <CreationHealthQuestionnaire /> </ProtectedRoute>)
-      },
-      {
-        path: '/ui/create-physical-evaluation/:id',
-        exact: true,
-        element: (<ProtectedRoute> <CreationPhysicalEvaluation /> </ProtectedRoute>)
-      },
-      {
-        path: '/ui/create-treatment/:id',
-        exact: true,
-        element: (<ProtectedRoute> <CreationMultipleTreatments /> </ProtectedRoute>)
-      },
-      {
-        path: '/ui/create-budget/:id',
-        exact: true,
-        element: (<ProtectedRoute> <CreationBudget /> </ProtectedRoute>)
-      },
-      {
-        path: '/ui/create-medical-image/:id',
-        exact: true,
-        element: (<ProtectedRoute> <CrationMedicalImage /> </ProtectedRoute>)
       },
       {
         path: '/appointments',

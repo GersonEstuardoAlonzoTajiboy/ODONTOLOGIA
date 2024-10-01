@@ -112,10 +112,13 @@ const PatientList = () => {
   }
 
   return (
-    <>
+    <Box sx={{ padding: '16px' }}>
       <Button variant="contained" color="secondary" size="large" onClick={createPatient}>
         Crear paciente
       </Button>
+      <Typography variant="h3" align="center" fontWeight={600} gutterBottom>
+        Lista de Pacientes
+      </Typography>
       {patients.length > 0 ? (
         <Table>
           <TableHead>
@@ -124,11 +127,7 @@ const PatientList = () => {
               <TableCell sx={{ fontSize: '15px' }}>Nombre Completo</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Dirección</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Sexo</TableCell>
-              <TableCell sx={{ fontSize: '15px' }}>Cuestionario</TableCell>
-              <TableCell sx={{ fontSize: '15px' }}>Evaluación</TableCell>
-              <TableCell sx={{ fontSize: '15px' }}>Tratamientos</TableCell>
-              <TableCell sx={{ fontSize: '15px' }}>Presupuesto</TableCell>
-              <TableCell sx={{ fontSize: '15px' }}>Imagenes</TableCell>
+              <TableCell sx={{ fontSize: '15px' }}>Ficha medica</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Historial</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Editar</TableCell>
               <TableCell sx={{ fontSize: '15px' }}>Eliminar</TableCell>
@@ -150,55 +149,7 @@ const PatientList = () => {
                       navigate(`/ui/create-health-questionnaire/${patient.id}`, { state: { patient: patient } })
                     }
                   >
-                    Salud
-                  </Button>
-                </TableCell>
-                <TableCell>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    onClick={() =>
-                      navigate(`/ui/create-physical-evaluation/${patient.id}`, { state: { patient: patient } })
-                    }
-                  >
-                    Fisica
-                  </Button>
-                </TableCell>
-                <TableCell>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    onClick={() =>
-                      navigate(`/ui/create-treatment/${patient.id}`, { state: { patient: patient } })
-                    }
-                  >
-                    Tratamiento
-                  </Button>
-                </TableCell>
-                <TableCell>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    onClick={() =>
-                      navigate(`/ui/create-budget/${patient.id}`, { state: { patient: patient } })
-                    }
-                  >
-                    Presupuesto
-                  </Button>
-                </TableCell>
-                <TableCell>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    onClick={() =>
-                      navigate(`/ui/create-medical-image/${patient.id}`, { state: { patient: patient } })
-                    }
-                  >
-                    Imagen
+                    Generar
                   </Button>
                 </TableCell>
                 <TableCell>
@@ -258,7 +209,7 @@ const PatientList = () => {
           )}
         </Box>
       </Modal>
-    </>
+    </Box>
   );
 };
 
