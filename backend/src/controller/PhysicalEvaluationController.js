@@ -5,21 +5,11 @@ const sequelize = PhysicalEvaluation.sequelize;
 export const registerPhysicalEvaluation = async (req, res, next) => {
   const transaction = await sequelize.transaction();
   try {
-    const {
-      blood_pressure,
-      blood_sugar,
-      last_treatment,
-      other_data,
-      patient_id
-    } = req.body;
+    const { blood_pressure, blood_sugar, last_treatment, other_data, patient_id } = req.body;
 
     await sequelize.query('CALL procedure_to_register_physical_evaluation(:blood_pressure, :blood_sugar, :last_treatment, :other_data, :patient_id)', {
       replacements: {
-        blood_pressure,
-        blood_sugar,
-        last_treatment,
-        other_data,
-        patient_id
+        blood_pressure, blood_sugar, last_treatment, other_data, patient_id
       },
       transaction: transaction
     });

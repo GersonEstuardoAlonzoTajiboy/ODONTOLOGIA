@@ -26,7 +26,7 @@ const DoctorList = () => {
       })
       .catch((error) => {
         console.error('Error fetching users:', error);
-        setError('Error al obtener los usuarios.');
+        setError('No existen registros de doctores.');
         setLoading(false);
       });
   }, []);

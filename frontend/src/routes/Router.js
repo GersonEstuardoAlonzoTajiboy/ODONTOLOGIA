@@ -20,7 +20,7 @@ const DoctorList = Loadable(lazy(() => import('../views/management/doctor/Doctor
 const ModificationCreationUser = Loadable(lazy(() => import('../views/management/user/ModificationCreationUser')));
 const PatientList = Loadable(lazy(() => import('../views/management/patient/PatientList')));
 const ModificationCreationPatient = Loadable(lazy(() => import('../views/management/patient/ModificationCreationPatient')));
-const ModificationCreationHealthQuestionnaire = Loadable(lazy(() => import('../views/management/patient/health-questionnaire/ModificationCreationHealthQuestionnaire')));
+const CreationHealthQuestionnaire = Loadable(lazy(() => import('../views/management/patient/health-questionnaire/CreationHealthQuestionnaire')));
 const CreationPhysicalEvaluation = Loadable(lazy(() => import('../views/management/patient/physical-evaluation/CreationPhysicalEvaluation')));
 const CreationTreatment = Loadable(lazy(() => import('../views/management/patient/treatment/CreationTreatment')));
 const CrationMedicalImage = Loadable(lazy(() => import('../views/management/patient/medical-image/CrationMedicalImage')));
@@ -91,7 +91,7 @@ const Router = [
       {
         path: '/ui/create-health-questionnaire/:id',
         exact: true,
-        element: (<ProtectedRoute> <ModificationCreationHealthQuestionnaire /> </ProtectedRoute>)
+        element: (<ProtectedRoute> <CreationHealthQuestionnaire /> </ProtectedRoute>)
       },
       {
         path: '/ui/create-physical-evaluation/:id',
