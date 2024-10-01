@@ -29,7 +29,7 @@ export const updateTreatmentPlan = async (req, res, next) => {
       return res.status(400).json({ message: 'Treatment Plan record does not exist.' });
     }
     await sequelize.query('CALL procedure_to_update_treatment_plan(:id, :plan_details, :estimated_cost, :treatment_category_id)', {
-      replacements: { id: id, plan_details: plan_details, estimated_cost: estimated_cost },
+      replacements: { id: id, plan_details: plan_details, estimated_cost: estimated_cost, treatment_category_id: treatment_category_id },
       transaction: transaction
     });
     await transaction.commit();
@@ -85,9 +85,7 @@ export const treatmentPlanList = async (req, res, next) => {
       ON 
         tp.treatment_category_id = tc.id
       WHERE 
-        tp.status = TRUE AND tc.status = TRUE
-      ORDER BY 
-        tp.createdAt DESC;
+        tp.status = TRUE AND tc.status = TRUE;
     `);
     const records = results || [];
     if (records.length === 0) {

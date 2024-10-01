@@ -8,14 +8,14 @@ const ModificationCreationTreatmentPlan = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const itemData = state?.item || {};
-  const isEditing = !!itemData.id;
+  const isEditing = !!itemData.treatment_plan_id;
 
-  const [itemId] = useState(isEditing ? itemData.id : '');
+  const [itemId] = useState(isEditing ? itemData.treatment_plan_id : '');
   const [planDetails, setPlanDetails] = useState(isEditing ? itemData.plan_details : '');
   const [estimatedCost, setEstimatedCost] = useState(isEditing ? itemData.estimated_cost : '');
 
   const [categories, setCategories] = useState([]);
-  const [selectedCategoryId, setSelectedCategoryId] = useState('');
+  const [selectedCategoryId, setSelectedCategoryId] = useState(isEditing ? itemData.treatment_category_id : '');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
