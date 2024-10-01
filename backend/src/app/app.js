@@ -13,6 +13,7 @@ import medicalImageRoute from '../route/medicalImageRoute.js'
 import appointmentScheduleRoute from '../route/appointmentScheduleRoute.js'
 import clinicalHistoryRoute from '../route/clinicalHistoryRoute.js'
 import treatmentPlanRoute from '../route/treatmentPlanRoute.js'
+import treatmentCategoryRoute from '../route/treatmentCategoryRoute.js'
 
 const app = express();
 
@@ -32,5 +33,6 @@ app.use('/api', medicalImageRoute);
 app.use('/api', appointmentScheduleRoute);
 app.use('/api', clinicalHistoryRoute);
 app.use('/api', treatmentPlanRoute);
+app.use('/api', treatmentCategoryRoute);
 
 export default app; 
