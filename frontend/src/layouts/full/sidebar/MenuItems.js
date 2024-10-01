@@ -1,4 +1,4 @@
-import { IconCalendar, IconLayoutDashboard, IconServicemark, IconUser } from '@tabler/icons';
+import { IconCalendar, IconCategory, IconLayoutDashboard, IconServicemark, IconUser } from '@tabler/icons';
 import { uniqueId } from 'lodash';
 import jwtUtils from '../../../api/jwtUtils';
 
@@ -81,6 +81,12 @@ const Menuitems = [
   {
     navlabel: true,
     subheader: 'Servicios'
+  },
+  {
+    id: uniqueId(),
+    title: 'Categorias',
+    icon: IconCategory,
+    href: '/treatments-category'
   },
   {
     id: uniqueId(),

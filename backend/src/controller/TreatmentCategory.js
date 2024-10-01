@@ -1,4 +1,4 @@
-import TreatmentCategory from '../model/TreatmentPlan.js';
+import TreatmentCategory from '../model/TreatmentCategory.js';
 
 const sequelize = TreatmentCategory.sequelize;
 
@@ -63,6 +63,18 @@ export const deleteLogicallyTreatmentCategory = async (req, res, next) => {
   } catch (error) {
     await transaction.rollback();
     console.error('Error deleting Treatment Category logically.', error);
+    res.status(500).send('Internal Server Error.');
+  }
+};
+
+export const getTreatmentCategories = async (req, res, next) => {
+  try {
+    const treatmentCategories = await TreatmentCategory.findAll({
+      where: { status: true }
+    });
+    res.status(200).json(treatmentCategories);
+  } catch (error) {
+    console.error('Error retrieving Treatment Categories.', error);
     res.status(500).send('Internal Server Error.');
   }
 };

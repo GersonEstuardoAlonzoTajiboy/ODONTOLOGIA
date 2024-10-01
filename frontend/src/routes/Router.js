@@ -33,6 +33,8 @@ const ScheduleCalendar = Loadable(lazy(() => import('../views/management/schedul
 /* ****Servicios**** */
 const TreatmentPlanList = Loadable(lazy(() => import('../views/management/treatment/TreatmentPlanList')));
 const ModificationCreationTreatmentPlan = Loadable(lazy(() => import('../views/management/treatment/ModificationCreationTreatmentPlan')));
+const TreatmentCategoryList = Loadable(lazy(() => import('../views/management/treatment-category/TreatmentCategoryList')));
+const ModificationCreationTreatmentCategory = Loadable(lazy(() => import('../views/management/treatment-category/ModificationCreationTreatmentCategory')));
 /* ****** */
 
 const Router = [
@@ -110,6 +112,21 @@ const Router = [
         path: '/schedules',
         exact: true,
         element: (<ProtectedRoute> <ScheduleCalendar /> </ProtectedRoute>)
+      },
+      {
+        path: '/treatments-category',
+        exact: true,
+        element: (<ProtectedRoute> <TreatmentCategoryList /> </ProtectedRoute>)
+      },
+      {
+        path: '/ui/create-treatment-category',
+        exact: true,
+        element: (<ProtectedRoute> <ModificationCreationTreatmentCategory /> </ProtectedRoute>)
+      },
+      {
+        path: '/ui/update-treatment-category/:id',
+        exact: true,
+        element: (<ProtectedRoute> <ModificationCreationTreatmentCategory /> </ProtectedRoute>)
       },
       {
         path: '/treatments',
