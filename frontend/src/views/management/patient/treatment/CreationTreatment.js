@@ -72,11 +72,11 @@ const CreationMultipleTreatments = () => {
       date: t.date
     }));
     const requestData = {
-      treatments: treatmentsData,
+      treatments_json: treatmentsData,
       patient_id: patientId
     };
     try {
-      const response = await fetch(`${SERVIDOR}/api/multiple-treatments`, {
+      const response = await fetch(`${SERVIDOR}/api/treatment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

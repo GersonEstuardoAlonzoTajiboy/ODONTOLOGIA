@@ -5,9 +5,10 @@ const sequelize = Treatment.sequelize;
 export const registerTreatment = async (req, res, next) => {
   const transaction = await sequelize.transaction();
   try {
-    const { p_treatments_json, patient_id } = req.body;
-    await sequelize.query('CALL procedure_to_register_multiple_treatments(:p_treatments_json, :patient_id)', {
-      replacements: { p_treatments_json, patient_id },
+    const treatments_json = JSON.stringify(req.body.treatments_json);
+    const { patient_id } = req.body;
+    await sequelize.query('CALL procedure_to_register_multiple_treatments(:treatments_json, :patient_id)', {
+      replacements: { treatments_json, patient_id },
       transaction: transaction
     });
     await transaction.commit();
