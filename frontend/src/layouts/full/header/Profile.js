@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Avatar, Box, Menu, Button, IconButton, MenuItem, ListItemIcon, ListItemText } from '@mui/material';
-import { IconListCheck, IconMail, IconUser } from '@tabler/icons';
+import { Avatar, Box, Menu, Button, IconButton } from '@mui/material';
 import ProfileImg from '../../../assets/images/profile/user-1.jpg';
 
 const Profile = () => {
@@ -60,24 +59,6 @@ const Profile = () => {
           },
         }}
       >
-        <MenuItem>
-          <ListItemIcon>
-            <IconUser width={20} />
-          </ListItemIcon>
-          <ListItemText>Mi perfil</ListItemText>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <IconMail width={20} />
-          </ListItemIcon>
-          <ListItemText>Mi cuenta</ListItemText>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <IconListCheck width={20} />
-          </ListItemIcon>
-          <ListItemText>Mis tareas</ListItemText>
-        </MenuItem>
         <Box mt={1} py={1} px={2}>
           <Button onClick={handleLogout} variant="outlined" color="primary" fullWidth>
             Cerrar sesión
