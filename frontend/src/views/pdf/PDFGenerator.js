@@ -92,13 +92,17 @@ export const PDFGenerator = ({
     body: treatments.map(t => [t.treatment, t.cost, t.date])
   });
 
-  // Presupuesto
+  // Tratamientos
   doc.setFontSize(14);
-  doc.text('PRESUPUESTO', doc.internal.pageSize.getWidth() / 2, doc.lastAutoTable.finalY + 10, { align: 'center' });
+  doc.text('TRATAMIENTOS', doc.internal.pageSize.getWidth() / 2, 230, { align: 'center' });
   doc.autoTable({
-    startY: doc.lastAutoTable.finalY + 20,
-    head: [['Tratamiento', 'Costo']],
-    body: budgetItems.map(b => [b.treatment, b.cost])
+    startY: 240,
+    head: [['Tratamiento', 'Costo', 'Fecha']],
+    body: treatments.map(t => [
+      t.treatment,
+      t.cost,
+      new Date(t.date).toLocaleDateString('es-ES')
+    ])
   });
 
   // Consentimiento informado
