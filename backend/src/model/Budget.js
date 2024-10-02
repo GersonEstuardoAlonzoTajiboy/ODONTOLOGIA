@@ -23,7 +23,7 @@ const Budget = sequelize.define('budget', {
   },
   creation_date: {
     type: DataTypes.DATEONLY,
-    allowNull: false
+    allowNull: true
   },
   status: {
     type: DataTypes.BOOLEAN,
