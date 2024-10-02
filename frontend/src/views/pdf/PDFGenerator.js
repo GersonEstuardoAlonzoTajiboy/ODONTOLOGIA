@@ -50,28 +50,29 @@ export const PDFGenerator = ({
   doc.setFontSize(12);
 
   // Preguntas del cuestionario
-  doc.text(`1. Hipertensión arterial: ${hypertension ? 'SI' : 'NO'}`, 14, 60);
+  doc.text(`1. ¿Sufre de Hipertensión arterial? ${hypertension ? 'SI' : 'NO'}`, 14, 60);
   if (hypertension) {
-    doc.text(`   Controlada: ${hypertensionControlled ? 'SI' : 'NO'}`, 14, 70);
+    doc.text(` ¿Está controlada? ¿Toma su tratamiento? ${hypertensionControlled ? 'SI' : 'NO'}`, 14, 70);
   }
-  doc.text(`2. Diabetes: ${diabetes ? 'SI' : 'NO'}`, 14, 80);
+  doc.text(`2. ¿Sufre de Diabetes? ${diabetes ? 'SI' : 'NO'}`, 14, 80);
   if (diabetes) {
-    doc.text(`   Controlada: ${diabetesControlled ? 'SI' : 'NO'}`, 14, 90);
+    doc.text(` ¿Está controlada? ¿Toma su tratamiento? ${diabetesControlled ? 'SI' : 'NO'}`, 14, 90);
   }
-  doc.text(`3. Hospitalizado en los últimos 2 años: ${hospitalized ? 'SI' : 'NO'}`, 14, 100);
-  doc.text(`4. Alergia a medicamentos: ${allergic ? 'SI' : 'NO'}`, 14, 110);
-  doc.text(`5. Sangramiento excesivo: ${excessiveBleeding ? 'SI' : 'NO'}`, 14, 120);
-  doc.text(`6. Enfermedades serias: ${seriousIllnesses}`, 14, 130);
+  doc.text(`3. ¿Haestado hospitalizado en los últimos dos años? ${hospitalized ? 'SI' : 'NO'}`, 14, 100);
+  doc.text(`4. ¿Esalérgico a la aspirina o penicilina u otra medicina? ${allergic ? 'SI' : 'NO'}`, 14, 110);
+  doc.text(`5. ¿Hatenido alguna vez algún sangramiento excesivo? ${excessiveBleeding ? 'SI' : 'NO'}`, 14, 120);
+  doc.text(`6. Indique las enfermedades serias que ha padecido o que padece: ${seriousIllnesses}`, 14, 130);
 
   if (isFemale) {
-    doc.text(`7. Embarazo: ${sheIsPregnant ? 'SI' : 'NO'}`, 14, 140);
+    doc.text(`7. Si es usted mujer, indique si está embarazada ${sheIsPregnant ? 'SI' : 'NO'}`, 14, 140);
     if (sheIsPregnant) {
-      doc.text(`   Meses de embarazo: ${pregnant}`, 14, 150);
+      doc.text(`¿Cuantos meses de embarazo? ${pregnant}`, 14, 150);
     }
   }
 
-  doc.text(`8. Comió en las últimas 6 horas: ${eatenLastSixHours ? 'SI' : 'NO'}`, 14, 160);
-  doc.text(`9. Síntomas recientes (tos, fiebre, etc.): ${covidSymptoms ? 'SI' : 'NO'}`, 14, 170);
+  doc.text(`9. ¿Hacomidoalgo en las últimas seis horas? ${eatenLastSixHours ? 'SI' : 'NO'}`, 14, 160);
+  doc.text(`10. En el último mes ha tenido síntomas como: ¿tos, fiebre, cansancio, perdida de
+                olfato y gusto, dolor de garganta, dolor en el pecho, diarrea, dolor de cabeza? ${covidSymptoms ? 'SI' : 'NO'}`, 14, 170);
 
   // Evaluación física
   doc.setFontSize(14);
