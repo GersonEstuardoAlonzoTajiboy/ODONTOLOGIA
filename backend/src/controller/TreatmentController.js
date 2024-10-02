@@ -19,3 +19,13 @@ export const registerTreatment = async (req, res, next) => {
     res.status(500).send('Internal Server Error.');
   }
 };
+
+export const getTotalCost = async (req, res) => {
+  try {
+    const totalCost = await Treatment.sum('cost');
+    res.json({ totalCost });
+  } catch (error) {
+    console.error('Error calculating total cost:', error);
+    res.status(500).send('Internal Server Error.');
+  }
+};

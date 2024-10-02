@@ -104,3 +104,13 @@ export const patientList = async (req, res, next) => {
     res.status(500).send('Internal Server Error.');
   }
 };
+
+export const getTotalPatients = async (req, res, next) => {
+  try {
+    const totalPatients = await Patient.count({ where: { status: true } }); // Cuenta solo pacientes activos
+    res.json({ totalPatients });
+  } catch (error) {
+    console.error('Error getting total patients', error);
+    res.status(500).send('Internal Server Error.');
+  }
+};

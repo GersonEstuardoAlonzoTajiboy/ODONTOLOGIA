@@ -1,6 +1,6 @@
 import express from 'express';
 import verifyToken from '../middleware/verifyToken.js';
-import { registerPatient, updatePatient, deleteLogicallyPatient, patientList } from '../controller/PatientController.js';
+import { registerPatient, updatePatient, deleteLogicallyPatient, patientList, getTotalPatients } from '../controller/PatientController.js';
 
 const router = express.Router();
 
@@ -15,5 +15,8 @@ router.patch('/patient', verifyToken, deleteLogicallyPatient);
 
 // ENDPOINT - PATIENT LIST
 router.get('/patient', verifyToken, patientList);
+
+// ENDPOINT - GET TOTAL NUMBER OF PATIENTS
+router.get('/patients/total', verifyToken, getTotalPatients);
 
 export default router;
