@@ -42,7 +42,7 @@ export const PDFGenerator = ({
   doc.setFontSize(14);
   doc.text('DATOS DEL PACIENTE', doc.internal.pageSize.getWidth() / 2, 30, { align: 'center' });
   doc.setFontSize(12);
-  doc.text(`Nombre paciente: ${fullNamePatient}`, 14, 40);
+  doc.text(`Nombre del paciente: ${fullNamePatient}`, 14, 40);
 
   // Cuestionario de salud
   doc.setFontSize(14);
