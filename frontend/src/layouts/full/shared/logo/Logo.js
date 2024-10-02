@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { ReactComponent as LogoDark } from '../../../../assets/images/logos/dark-logo.svg';
+import LogoDark from '../../../../assets/images/logos/IMG-20240709-WA0006.jpg';
 import { styled } from '@mui/material';
 
 const LinkStyled = styled(Link)(() => ({
-  height: '70px',
-  width: '180px',
+  height: '40px',
+  width: '150px',
   overflow: 'hidden',
   display: 'block',
 }));
@@ -12,9 +12,9 @@ const LinkStyled = styled(Link)(() => ({
 const Logo = () => {
   return (
     <LinkStyled>
-      <LogoDark height={70} />
+      <img src={LogoDark} alt="Logo" height={40} width={150} />
     </LinkStyled>
-  )
+  );
 };
 
 export default Logo;
