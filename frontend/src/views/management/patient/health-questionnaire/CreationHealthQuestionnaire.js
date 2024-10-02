@@ -35,6 +35,9 @@ const CreationHealthQuestionnaire = () => {
   const [treatments, setTreatments] = useState([{ treatment: '', cost: '', date: '' }]);
   const [budgetItems, setBudgetItems] = useState([{ treatment: '', cost: '' }]);
   const [treatmentPlanList, setTreatmentPlanList] = useState([]);
+  const [hallazgosRx, setHallazgosRx] = useState('');
+  const [hallazgosClinico, setHallazgosClinico] = useState('');
+  const [consentimiento, setConsentimiento] = useState('');
 
   useEffect(() => {
     const fetchTreatments = async () => {
@@ -235,7 +238,10 @@ const CreationHealthQuestionnaire = () => {
       otherData,
       treatments: treatmentsData,
       budgetItems: budgetData,
-      fullNamePatient
+      fullNamePatient,
+      hallazgosRx,
+      hallazgosClinico,
+      consentimiento
     });
   }
 
@@ -473,6 +479,30 @@ const CreationHealthQuestionnaire = () => {
             >
               Añadir otro tratamiento
             </Button>
+            <Typography variant="subtitle1" align='center' fontWeight={600}>
+              Consentimiento
+            </Typography>
+            <TextField
+              fullWidth
+              variant="outlined"
+              label="Hallazgos Clinicos y Rx"
+              value={hallazgosRx}
+              onChange={(e) => setHallazgosRx(e.target.value)}
+            />
+            <TextField
+              fullWidth
+              variant="outlined"
+              label="Hallazgos Intraorales"
+              value={hallazgosClinico}
+              onChange={(e) => setHallazgosClinico(e.target.value)}
+            />
+            <TextField
+              fullWidth
+              variant="outlined"
+              label="Consentimiento Informado"
+              value={consentimiento}
+              onChange={(e) => setConsentimiento(e.target.value)}
+            />
             <Box>
               <Button
                 color="primary"
