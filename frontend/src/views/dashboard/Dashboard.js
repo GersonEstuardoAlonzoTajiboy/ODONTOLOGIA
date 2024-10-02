@@ -6,6 +6,7 @@ import { SERVIDOR } from '../../api/Servidor';
 const Dashboard = () => {
   const [totalCost, setTotalCost] = useState(null);
   const [totalPatients, setTotalPatients] = useState(null);
+  const [totalDoctors, setTotalDoctors] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -29,7 +30,7 @@ const Dashboard = () => {
     };
     const fetchTotalPatients = async () => {
       try {
-        const response = await fetch(`${SERVIDOR}/patients/total`, {
+        const response = await fetch(`${SERVIDOR}/api/patients/total`, {
           method: 'GET',
           headers: {
             'x-access-token': token,
@@ -40,13 +41,32 @@ const Dashboard = () => {
           throw new Error('Error al obtener el total de pacientes');
         }
         const data = await response.json();
-        setTotalPatients(data.totalPatients); // Set total patients in state
+        setTotalPatients(data.totalPatients);
       } catch (error) {
         console.error('Error fetching total patients:', error);
       }
     };
+    const fetchTotalDoctors = async () => {
+      try {
+        const response = await fetch(`${SERVIDOR}/api/doctors/total`, {
+          method: 'GET',
+          headers: {
+            'x-access-token': token,
+            'Content-Type': 'application/json',
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Error al obtener el total de doctores');
+        }
+        const data = await response.json();
+        setTotalDoctors(data.totalDoctors);
+      } catch (error) {
+        console.error('Error fetching total doctors:', error);
+      }
+    };
     fetchTotalCost();
     fetchTotalPatients();
+    fetchTotalDoctors();
   }, []);
 
   return (
@@ -73,6 +93,18 @@ const Dashboard = () => {
                 </Typography>
                 <Typography variant="h6" color="textSecondary">
                   {totalPatients !== null ? totalPatients : 'Cargando...'}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Card>
+              <CardContent>
+                <Typography variant="h5" component="div">
+                  Total de Doctores
+                </Typography>
+                <Typography variant="h6" color="textSecondary">
+                  {totalDoctors !== null ? totalDoctors : 'Cargando...'}
                 </Typography>
               </CardContent>
             </Card>

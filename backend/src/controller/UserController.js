@@ -167,3 +167,15 @@ export const listDoctors = async (req, res, next) => {
     res.status(500).send('Internal Server Error.');
   }
 };
+
+export const totalDoctors = async (req, res, next) => {
+  try {
+    const totalDoctors = await User.count({
+      where: { type_of_user: 'DOCTOR', status: true }
+    });
+    res.json({ totalDoctors });
+  } catch (error) {
+    console.error('Error counting doctors', error);
+    res.status(500).send('Internal Server Error.');
+  }
+};
