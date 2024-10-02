@@ -1,5 +1,6 @@
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import LogoRic from '../../assets/images/logos/IMG-20240709-WA0007.jpg';
 
 export const PDFGenerator = ({
   hypertension,
@@ -27,6 +28,11 @@ export const PDFGenerator = ({
   consentimiento
 }) => {
   const doc = new jsPDF();
+
+  // Agregar el logo en la parte superior izquierda
+  const logoWidth = 20; // ancho del logo
+  const logoHeight = 20; // alto del logo
+  doc.addImage(LogoRic, 'JPEG', 10, 10, logoWidth, logoHeight); // Ajusta las posiciones y tamaños según sea necesario
 
   // Título
   doc.setFontSize(18);
