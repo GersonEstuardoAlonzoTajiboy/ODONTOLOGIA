@@ -19,6 +19,7 @@ const UserList = Loadable(lazy(() => import('../views/management/user/UserList')
 const DoctorList = Loadable(lazy(() => import('../views/management/doctor/DoctorList')));
 const ModificationCreationUser = Loadable(lazy(() => import('../views/management/user/ModificationCreationUser')));
 const PatientList = Loadable(lazy(() => import('../views/management/patient/PatientList')));
+const ImagesPatient = Loadable(lazy(() => import('../views/management/patient/ImagesPatient')));
 const ModificationCreationPatient = Loadable(lazy(() => import('../views/management/patient/ModificationCreationPatient')));
 const CreationHealthQuestionnaire = Loadable(lazy(() => import('../views/management/patient/health-questionnaire/CreationHealthQuestionnaire')));
 const CrationMedicalImage = Loadable(lazy(() => import('../views/management/patient/medical-image/CrationMedicalImage')));
@@ -92,6 +93,11 @@ const Router = [
         path: '/ui/create-medical-image/:id',
         exact: true,
         element: (<ProtectedRoute> <CrationMedicalImage /> </ProtectedRoute>)
+      },
+      {
+        path: '/ui/list-medical-image/:id',
+        exact: true,
+        element: (<ProtectedRoute> <ImagesPatient /> </ProtectedRoute>)
       },
       {
         path: '/appointments',

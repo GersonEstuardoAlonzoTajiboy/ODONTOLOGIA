@@ -162,7 +162,19 @@ const PatientList = () => {
                       navigate(`/ui/create-medical-image/${patient.id}`, { state: { patient: patient } })
                     }
                   >
-                    Imagen
+                    Agregar
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    onClick={() =>
+                      navigate(`/ui/list-medical-image/${patient.id}`, { state: { patient: patient } })
+                    }
+                  >
+                    Ver
                   </Button>
                 </TableCell>
                 <TableCell>
