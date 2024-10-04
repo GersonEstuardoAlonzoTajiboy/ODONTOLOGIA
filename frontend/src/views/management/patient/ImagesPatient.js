@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
+import { SERVIDOR } from '../../../api/Servidor';
 
 const ImagesPatient = () => {
+  const { state } = useLocation();
+  const patientData = state?.patient || {};
+  const isEditing = !!patientData.id;
+  const [patientId] = useState(isEditing ? patientData.id : '');
   const [images, setImages] = useState([]);
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:3000/patient/1/images', {
+        const response = await fetch(`${SERVIDOR}/api/patient/${patientId}/images`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
