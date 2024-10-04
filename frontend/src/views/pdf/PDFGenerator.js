@@ -69,13 +69,19 @@ export const PDFGenerator = ({
       doc.text(`¿Cuantos meses de embarazo? ${pregnant}`, 14, 150);
     }
   }
-  doc.text(`9. ¿Ha comido algo en las últimas seis horas? ${eatenLastSixHours ? 'SI' : 'NO'}`, 14, 160);
-  const question10 = `10. En el último mes ha tenido síntomas como: ¿tos, fiebre, cansancio, pérdida de olfato y gusto, dolor de garganta, dolor en el pecho, diarrea, dolor de cabeza? ${covidSymptoms ? 'SI' : 'NO'}`;
-  const question10Lines = doc.splitTextToSize(question10, 180);
-  const question10Y = 170;
-  question10Lines.forEach((line, index) => {
-    doc.text(line, 14, question10Y + (index * 10));
-  });
+
+  doc.text(`9. ¿Hacomidoalgo en las últimas seis horas? ${eatenLastSixHours ? 'SI' : 'NO'}`, 14, 160);
+  doc.text(`10. En el último mes ha tenido síntomas como: ¿tos, fiebre, cansancio, perdida de
+                olfato y gusto, dolor de garganta, dolor en el pecho, diarrea, dolor de cabeza? ${covidSymptoms ? 'SI' : 'NO'}`, 14, 170);
+
+  // Evaluación física
+  doc.setFontSize(14);
+  doc.text('EVALUACION FISICA', doc.internal.pageSize.getWidth() / 2, 180, { align: 'center' });
+  doc.setFontSize(12);
+  doc.text(`Presión arterial: ${bloodPressure}`, 14, 190);
+  doc.text(`Azúcar en sangre: ${bloodSugar}`, 14, 200);
+  doc.text(`Último tratamiento: ${lastTreatment}`, 14, 210);
+  doc.text(`Otros datos: ${otherData}`, 14, 220);
 
   // Tratamientos
   doc.setFontSize(14);
