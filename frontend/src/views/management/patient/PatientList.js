@@ -154,28 +154,28 @@ const PatientList = () => {
                   </Button>
                 </TableCell>
                 <TableCell>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    onClick={() =>
-                      navigate(`/ui/create-medical-image/${patient.id}`, { state: { patient: patient } })
-                    }
-                  >
-                    Agregar
-                  </Button>
-                </TableCell>
-                <TableCell>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    onClick={() =>
-                      navigate(`/ui/list-medical-image/${patient.id}`, { state: { patient: patient } })
-                    }
-                  >
-                    Ver
-                  </Button>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="small"
+                      onClick={() =>
+                        navigate(`/ui/create-medical-image/${patient.id}`, { state: { patient: patient } })
+                      }
+                    >
+                      Agregar
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="small"
+                      onClick={() =>
+                        navigate(`/ui/list-medical-image/${patient.id}`, { state: { patient: patient } })
+                      }
+                    >
+                      Ver
+                    </Button>
+                  </div>
                 </TableCell>
                 <TableCell>
                   <IconButton
