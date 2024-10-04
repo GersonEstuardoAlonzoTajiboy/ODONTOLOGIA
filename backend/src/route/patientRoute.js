@@ -1,6 +1,6 @@
 import express from 'express';
 import verifyToken from '../middleware/verifyToken.js';
-import { registerPatient, updatePatient, deleteLogicallyPatient, patientList, getTotalPatients } from '../controller/PatientController.js';
+import { registerPatient, updatePatient, deleteLogicallyPatient, patientList, getTotalPatients, listMedicalImages } from '../controller/PatientController.js';
 
 const router = express.Router();
 
@@ -18,5 +18,8 @@ router.get('/patient', verifyToken, patientList);
 
 // ENDPOINT - GET TOTAL NUMBER OF PATIENTS
 router.get('/patients/total', verifyToken, getTotalPatients);
+
+// ENDPOINT - LIST MEDICAL IMAGES FOR A PATIENT
+router.get('/patient/:patient_id/images', verifyToken, listMedicalImages);
 
 export default router;

@@ -114,3 +114,32 @@ export const getTotalPatients = async (req, res, next) => {
     res.status(500).send('Internal Server Error.');
   }
 };
+
+export const listMedicalImages = async (req, res, next) => {
+  const transaction = await sequelize.transaction();
+  try {
+    const { patient_id } = req.params;
+    if (isNaN(patient_id)) {
+      return res.status(400).json({ message: 'Invalid patient ID.' });
+    }
+    const images = await sequelize.query(
+      `SELECT id, image_base_64, description, createdAt, updatedAt 
+       FROM medical_image 
+       WHERE patient_id = :patient_id`,
+      {
+        replacements: { patient_id },
+        type: sequelize.QueryTypes.SELECT,
+        transaction
+      }
+    );
+    if (!images || images.length === 0) {
+      return res.status(404).json({ message: 'No medical images found for this patient.' });
+    }
+    await transaction.commit();
+    res.json(images);
+  } catch (error) {
+    await transaction.rollback();
+    console.error('Error retrieving medical images.', error);
+    res.status(500).send('Internal Server Error.');
+  }
+};
